@@ -1,9 +1,13 @@
 import React from 'react';
-import Layout from '../../Components/Layout';
+import Card from '../../Components/Card';
 
 const Home = () => {
     return (
-            <div>Home</div>
+            <div>
+                Home
+                <Card />
+            </div>
+            
     );
 };
 
