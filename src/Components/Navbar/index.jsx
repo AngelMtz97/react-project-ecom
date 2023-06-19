@@ -96,8 +96,9 @@ const Navbar = () => {
                         Sign In
                     </NavLink>
                 </li>
-                <li>
-                 <ShoppingCartIcon className='h-6 w-6 text-black-500' />{context.count}
+                <li className='flex justify-between items-center'>
+                    <ShoppingCartIcon className='h-7 w-7 text-black-500' />
+                      <div>{context.count}</div>
                 </li>                
             </ul>
         </nav>
