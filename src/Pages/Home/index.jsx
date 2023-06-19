@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import React from 'react';
 import Card from '../../Components/Card';
+import ProductDetail from '../../Components/ProductDetail';
 
 const Home = () => {
 
@@ -31,7 +32,7 @@ const Home = () => {
                 }
                 </div>
                
-               
+               <ProductDetail />
             </div>
             
     );
