@@ -6,10 +6,16 @@ import { PlusIcon } from '@heroicons/react/24/solid';
 const Card = ({id, description, category, title, image, price}) => {
     
     const context = useContext(ShoppingCartContext);
+    const currentProduct = {id, description, category, title, image, price };
 
     const showProduct = () => {
         context.openProductDetail();
         context.setProductDetail({category, title, image, price, description});
+    }
+
+    const addProductToCart = (newProduct) => {
+        context.setCartProducts([...context.cartProducts, newProduct]);
+        console.log('CART: '+context.cartProducts);
     }
 
     return (
@@ -22,7 +28,8 @@ const Card = ({id, description, category, title, image, price}) => {
                 <img className='w-full h-full object-cover rounded-lg' src={image} alt={title}/>
                 <button className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1' onClick={(event)=>{
                     event.stopPropagation();
-                    context.setCount(context.count+1)
+                    context.setCount(context.count+1);
+                    addProductToCart(currentProduct);
                 }}>
                     <PlusIcon className='h-4 w-5 text-black'/>
                 </button>

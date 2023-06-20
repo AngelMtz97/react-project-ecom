@@ -12,6 +12,9 @@ const ShoppingCartProvider = ({children}) => {
 
     const [productDetail, setProductDetail] = useState({});
 
+    // Cart
+    const [cartProducts, setCartProducts] = useState([]);
+
 
     const openProductDetail = () => {
         setisProductDetailOpen(true);
@@ -29,7 +32,9 @@ const ShoppingCartProvider = ({children}) => {
             closeProductDetail,
             isProductDetailOpen,
             productDetail,
-            setProductDetail
+            setProductDetail,
+            cartProducts,
+            setCartProducts
         }}>
             {children}
         </ShoppingCartContext.Provider> 
