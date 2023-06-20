@@ -13,8 +13,12 @@ const Card = ({id, description, category, title, image, price}) => {
         context.setProductDetail({category, title, image, price, description});
     }
 
-    const addProductToCart = (newProduct) => {
+    const addProductToCart = (event, newProduct) => {
+        event.stopPropagation();
         context.setCartProducts([...context.cartProducts, newProduct]);
+        context.setCount(context.count+1);
+        context.openCheckoutSideMenu();
+        context.closeProductDetail();
         console.log('CART: '+context.cartProducts);
     }
 
@@ -27,9 +31,7 @@ const Card = ({id, description, category, title, image, price}) => {
                 <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5'>{category?.name}</span>
                 <img className='w-full h-full object-cover rounded-lg' src={image} alt={title}/>
                 <button className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1' onClick={(event)=>{
-                    event.stopPropagation();
-                    context.setCount(context.count+1);
-                    addProductToCart(currentProduct);
+                    addProductToCart(event, currentProduct);
                 }}>
                     <PlusIcon className='h-4 w-5 text-black'/>
                 </button>
