@@ -22,6 +22,9 @@ const ShoppingCartProvider = ({children}) => {
     // Cart
     const [cartProducts, setCartProducts] = useState([]);
 
+    // Shopping cart - Order
+    const [order, setOrder] = useState([]);
+
     // Checkout side menu
     const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
 
@@ -46,7 +49,9 @@ const ShoppingCartProvider = ({children}) => {
             productDetail,
             setProductDetail,
             cartProducts,
-            setCartProducts
+            setCartProducts,
+            order,
+            setOrder
         }}>
             {children}
         </ShoppingCartContext.Provider> 
