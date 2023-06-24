@@ -15,7 +15,7 @@ const MyOrders = () => {
             
             {
                 context.order.map((item, index)=>{
-                    return <Link key={index} to={`/my-orders/${item.id}`}>
+                    return <Link key={index} to={`/my-orders/${index}`}>
                             <OrdersCard totalPrice={item.totalPrice} totalProducts={item.totalProducts} />
                           </Link>
                 })
