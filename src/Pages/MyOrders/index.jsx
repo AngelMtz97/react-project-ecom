@@ -16,7 +16,7 @@ const MyOrders = () => {
             {
                 context.order.map((item, index)=>{
                     return <Link key={index} to={`/my-orders/${index}`}>
-                            <OrdersCard totalPrice={item.totalPrice} totalProducts={item.totalProducts} />
+                            <OrdersCard dateCheckout={item.date} totalPrice={item.totalPrice} totalProducts={item.totalProducts} />
                           </Link>
                 })
             }
