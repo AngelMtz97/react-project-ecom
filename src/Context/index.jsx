@@ -14,8 +14,10 @@ const ShoppingCartProvider = ({children}) => {
     // Get products
     const [items, setItems] = useState(null);
 
+    const [filteredItems, setFilteredItems] = useState(null);
+
     // Get products by title
-    const [searchByTitle, setSearchByTitle] = useState(null);
+    const [searchByTitle, setSearchByTitle] = useState('');
 
     
     useEffect(() => {
@@ -31,6 +33,19 @@ const ShoppingCartProvider = ({children}) => {
 
 
     }, []);
+
+    const filteredItemsByTitle = (itemsProducts, searchProductByTitle) => {
+        return itemsProducts?.filter( (item) =>{
+            return item.title.toLowerCase().includes(searchProductByTitle.toLowerCase());
+        });
+    }
+
+    useEffect(() =>{
+        if(searchByTitle){
+            setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+        }
+
+    }, [items, searchByTitle]);
 
     const openProductDetail = () => {
         setIsProductDetailOpen(true);
@@ -76,7 +91,8 @@ const ShoppingCartProvider = ({children}) => {
             items,
             setItems,
             searchByTitle,
-            setSearchByTitle
+            setSearchByTitle,
+            filteredItems
         }}>
             {children}
         </ShoppingCartContext.Provider> 
