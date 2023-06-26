@@ -2,13 +2,35 @@ import {useContext} from 'react';
 import Card from '../../Components/Card';
 import ProductDetail from '../../Components/ProductDetail'
 import { ShoppingCartContext } from '../../Context';
+import { useParams } from 'react-router-dom';
 
 const Home = () => {
 
     const context = useContext(ShoppingCartContext);
+    const {categoryPath} = useParams();
 
     const renderView = () => {
-        const itemsToRender = context.searchByTitle?.length > 0 ? context.filteredItems : context.items;
+       
+        let itemsToRender = context.searchByTitle?.length > 0? 
+        context.filteredItems : context.items;
+
+        if(!!categoryPath){
+
+            // console.log('Category Path: '+categoryPath);
+
+            const categories = {
+                'men-clothes': "men's clothing",
+                'women-clothes' : "women's clothing",
+                'electronics' : 'electronics',
+                'jewelery' : 'jewelery'
+            }
+
+            let category = categories[categoryPath];
+
+            itemsToRender = itemsToRender.filter((item) =>{
+                return item.category.toLowerCase() === category.toLowerCase();
+            })
+        }
 
         if(itemsToRender?.length > 0){
           return itemsToRender.map((item)=>{
