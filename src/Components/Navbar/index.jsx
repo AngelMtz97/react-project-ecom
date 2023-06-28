@@ -113,9 +113,18 @@ const Navbar = () => {
                         Sign In
                     </NavLink>
                 </li>
-                <li className='flex justify-between items-center'>
+                <li>
+                    <button className='flex justify-between items-center' onClick={() => {
+                        if(!context.isCheckoutSideMenuOpen){
+                            context.openCheckoutSideMenu();
+                        }else{
+                            context.closeCheckoutSideMenu();
+                        }
+                        
+                    }}>
                     <ShoppingCartIcon className='h-7 w-7 text-black-500' />
                       <div>{context.count}</div>
+                      </button>
                 </li>                
             </ul>
         </nav>
