@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { PencilSquareIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
+import  PanelMessage  from '../../Components/PanelMessage';
 
 const MyAccount = () => {
     const [isEditable, setIsEditable] = useState(false);
@@ -8,6 +9,7 @@ const MyAccount = () => {
     const [firstName, setFirstName] = useState(context?.account?.firstName);
     const [lastName, setLastName] = useState(context?.account?.lastName);
     const [email, setEmail] = useState(context?.account?.email);
+    const [saved, setSaved] = useState(false);
 
     const handleEdit = () => {
         setIsEditable(true);    
@@ -24,6 +26,7 @@ const MyAccount = () => {
             updAccount.firstName = firstName;
             updAccount.lastName = lastName;
             context.saveAccount(updAccount);
+            setSaved(true);
         }
         
         setIsEditable(false);    
@@ -106,9 +109,14 @@ const MyAccount = () => {
                                         required disabled/>
     }
 
+    const toggleStateSavedd = () =>{
+        setSaved(false);
+    }
+
     return (
         <div className='flex flex-col justify-between w-1/4'>
             <h1 className="text-xl font-bold py-2">My Account</h1>
+            {saved &&  <PanelMessage message='Succesfully changed.' variant='success' timeout={5000} onClose={toggleStateSavedd}/>}
             <div className='flex flex-col justify-between items-start w-full'>
                  
                  {

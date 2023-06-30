@@ -1,7 +1,9 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useState, useEffect } from "react";
 
 const PanelMessage = (props) => {
-    const {message, variant, onClose} = props;
+    const {message, variant, onClose, timeout} = props;
+    const [idTimeout, setIdTimeOut] = useState('');
 
     const variants = {
         'info': {
@@ -18,22 +20,36 @@ const PanelMessage = (props) => {
         }
     }
 
+    useEffect(()=>{
+        if(onClose){
+            if(timeout){
+                setIdTimeOut(setTimeout(() => { 
+                      onClose();
+                  }, timeout));
+            }
+          }
+    }, []);
+
     const isValidVariant = () => {
         return variant && variants[variant] ? true : false;
     }
 
     const toggleState = () =>{
-          onClose();
+
+        if(onClose){
+            clearTimeout(idTimeout);
+            onClose();  
+        }
     }
 
     return (
         <div>
-          { isValidVariant && open && <div className={`${variants[variant].classVariant} text-white rounded mb-6 h-8 flex items-center justify-around`}>
+          { isValidVariant && <div className={`${variants[variant].classVariant} text-white rounded mb-6 h-8 flex items-center justify-around`}>
                <p className='pl-12'>{message}</p>
                <button onClick={() => {
                      toggleState()
                   }}>
-                 <XMarkIcon className='text-white h-5 w-5'/>
+                 {onClose && <XMarkIcon className='text-white h-5 w-5'/>}
                </button>
             </div>}
         </div>
