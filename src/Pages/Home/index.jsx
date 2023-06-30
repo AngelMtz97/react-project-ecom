@@ -41,9 +41,12 @@ const Home = () => {
         }
 
         if(itemsToRender?.length > 0){
-          return itemsToRender.map((item)=>{
-            return <Card key={item.id} {...item}/>
-         })
+          return (<div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+                   { itemsToRender.map((item)=>{
+                       return <Card key={item.id} {...item}/>
+                    })
+                   }
+                 </div>);
         }else{
             return <p><strong>{context.searchByTitle}</strong> not found.</p>;
         }
@@ -60,6 +63,7 @@ const Home = () => {
                     </i>
                     <input type='text'
                             value={context.searchByTitle}
+                            maxLength={50}
                             placeholder='Search a product'
                             className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none placeholder:pl-4 pl-10'
                             onChange={(event) => {
@@ -67,11 +71,10 @@ const Home = () => {
                             }}
                             />
                  </div>
-                <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+                
                 {
                     renderView()
                 }
-                </div>
                
                <ProductDetail />
             </div>
