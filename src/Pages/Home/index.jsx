@@ -1,14 +1,23 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import Card from '../../Components/Card';
 import ProductDetail from '../../Components/ProductDetail'
 import { ShoppingCartContext } from '../../Context';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 const Home = () => {
 
     const context = useContext(ShoppingCartContext);
     const {categoryPath} = useParams();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(context){
+            if(context.signOut){
+                navigate('/sign-in')
+            }
+        }
+    },[]);
 
     const renderView = () => {
        
