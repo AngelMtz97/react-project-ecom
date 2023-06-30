@@ -12,47 +12,47 @@ const Navbar = () => {
         <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
             <ul className='flex items-center gap-3 pr-200'>
                 <li className='font-semibold text-lg'>
-                    <NavLink to='/'>
+                   <NavLink to={ !context.signOut ? '/' : false}>
                         Shopi
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/'
+                    <NavLink to={ !context.signOut ? '/' : false }
                     className={({ isActive }) =>
-                    isActive ? activeStyle : undefined
+                    isActive && !context.signOut ? activeStyle : undefined
                     }>
                         All
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/men-clothes'
+                    <NavLink to={ !context.signOut ? '/men-clothes' : false}
                     className={({ isActive }) =>
-                        isActive ? activeStyle : undefined
+                        isActive && !context.signOut ? activeStyle : undefined
                     }>
                         Men's clothes
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/women-clothes'
+                    <NavLink to={ !context.signOut ? '/women-clothes' : false}
                     className={({ isActive }) =>
-                        isActive ? activeStyle : undefined
+                        isActive && !context.signOut ? activeStyle : undefined
                     }>
                         Women's clothes
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/electronics'
+                    <NavLink to={ !context.signOut ? '/electronics' : false}
                         className={({ isActive }) =>
-                        isActive ? activeStyle : undefined
+                        isActive && !context.signOut ? activeStyle : undefined
                         }
                     >
                         Electronics
                     </NavLink>
                 </li>
                 <li>
-                <NavLink to='/jewelery'
+                <NavLink to={ !context.signOut ? '/jewelery' : false}
                         className={({ isActive }) =>
-                        isActive ? activeStyle : undefined
+                        isActive && !context.signOut ? activeStyle : undefined
                         }
                     >
                         Jewelery
@@ -85,10 +85,12 @@ const Navbar = () => {
                 </li> */ }
             </ul>
             <ul className='flex items-center gap-3'>
-                <li className='text-black/60'>
-                   armando@hotmail.com
-                </li>
-                <li>
+                { !context.signOut && <li className='text-black/60'>
+                     { context?.account?.email}
+                  </li>
+                }
+                {
+                 !context.signOut && <li>
                     <NavLink to='/my-orders' 
                      className={({ isActive }) =>
                       isActive ? activeStyle : undefined
@@ -96,7 +98,9 @@ const Navbar = () => {
                         My Orders
                     </NavLink>
                 </li>
-                <li>
+                }
+               {
+                !context.signOut && <li>
                     <NavLink to='/my-account'
                     className={({ isActive }) =>
                         isActive ? activeStyle : undefined
@@ -104,7 +108,8 @@ const Navbar = () => {
                         My Account
                     </NavLink>
                 </li>
-                <li>
+                }
+                { context.signOut && <li>
                     <NavLink to='/sign-in'
                     className={({ isActive }) =>
                         isActive ? activeStyle : undefined
@@ -112,15 +117,19 @@ const Navbar = () => {
                         Sign In
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to='/sign-in'
+                }
+                {
+                !context.signOut && <li>              
+                    <NavLink to='/sign-in?authuser=0'
                     className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         Sign out
                     </NavLink>
                 </li>
-                <li>
+                }
+                {
+                !context.signOut && <li>
                     <button className='flex justify-between items-center' onClick={() => {
                         if(!context.isCheckoutSideMenuOpen){
                             context.openCheckoutSideMenu();
@@ -132,7 +141,8 @@ const Navbar = () => {
                     <ShoppingCartIcon className='h-7 w-7 text-black-500' />
                       <div>{context.count}</div>
                       </button>
-                </li>                
+                </li>
+                }                
             </ul>
         </nav>
     );

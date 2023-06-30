@@ -1,8 +1,11 @@
 import { createContext, useState, useEffect } from 'react'
+import { useLocalStorage } from './useLocalStorage';
 
 const ShoppingCartContext = createContext()
 
 const ShoppingCartProvider = ({children}) => {
+
+    const {account, signOut, saveAccount, saveSignOut, error} = useLocalStorage();
 
     // shopping Cart
     const [count, setCount] = useState(0);
@@ -91,7 +94,12 @@ const ShoppingCartProvider = ({children}) => {
             setItems,
             searchByTitle,
             setSearchByTitle,
-            filteredItems
+            filteredItems,
+            account,
+            signOut,
+            saveAccount,
+            saveSignOut,
+            error
         }}>
             {children}
         </ShoppingCartContext.Provider> 
