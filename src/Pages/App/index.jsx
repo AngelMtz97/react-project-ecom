@@ -10,6 +10,7 @@ import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 import SignUp from '../SignUp'
+import ForgotPassword from '../ForgotPassword'
 import './App.css'
 
 const AppRoutes = () => {
@@ -23,7 +24,7 @@ const AppRoutes = () => {
     {path: '/my-account', element: <MyAccount />},
     {path: '/sign-in', element: <SignIn />},
     {path: '/sign-up', element: <SignUp />},
-    {path: '/forgot-password', element: <NotFound />},
+    {path: '/forgot-password', element: <ForgotPassword />},
     {path: '/*', element: <NotFound />}
   ])
 
