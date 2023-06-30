@@ -23,8 +23,12 @@ const SignIn = () => {
         
         let isAuth = query.get('authuser');
         
-        if(isAuth && isAuth == '0'){
+        if(isAuth && isAuth == '0' ){
             context.saveSignOut(true);
+        }
+
+        if(!context.signOut){
+            navigate('/');
         }
 
     }, [error]);
