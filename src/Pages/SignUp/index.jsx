@@ -24,6 +24,11 @@ const SignUp = () => {
             'email' : email,
             'password' : password
         });
+
+        if(!context.error){
+            navigate('/');
+        }
+
     }
 
     const firstNameHandler = (event) => {
