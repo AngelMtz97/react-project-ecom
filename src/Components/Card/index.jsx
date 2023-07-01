@@ -49,7 +49,7 @@ const Card = ({id, description, category, title, image, price}) => {
                     { productAddedToCart(currentProduct) ? <CheckIcon className='h-4 w-4 text-green-400'/> : <PlusIcon className='h-4 w-4 text-black'/>}
                 </button>
             </figure>
-            <p className='flex justify-between'>
+            <p className='flex justify-between items-center'>
                 <span className='text-sm font-light truncate mr-2'>{title}</span>
                 <span className='text-lg font-medium'>${price}</span>
             </p>
